@@ -1,0 +1,137 @@
+/* Importação de Fonte (a mesma do login para manter a consistência) */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+/* Variáveis de Cor (idênticas ao login para manter o tema) */
+:root {
+    --primary-color: #4f46e5;
+    /* Um tom de índigo/roxo */
+    --background-color: #f3f4f6;
+    /* Cinza claro para o fundo */
+    --card-background: #ffffff;
+    --text-color: #111827;
+    /* Cinza bem escuro */
+    --label-color: #374151;
+    --border-color: #d1d5db;
+    --error-color: #dc2626;
+    --button-text-color: #ffffff;
+}
+
+
+/* O Card/Container do Formulário */
+#register-form-section {
+    background-color: var(--card-background);
+    padding: 2.5rem;
+    /* 40px */
+    border-radius: 0.75rem;
+    /* 12px */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    /* 448px */
+    box-sizing: border-box;
+}
+
+/* Título */
+#register-form-section h2 {
+    font-size: 1.5rem;
+    /* 24px */
+    font-weight: 700;
+    text-align: center;
+    color: var(--text-color);
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    /* 24px */
+}
+
+/* Labels dos campos */
+label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.875rem;
+    /* 14px */
+    color: var(--label-color);
+    margin-bottom: 0.5rem;
+    /* 8px */
+}
+
+/* Inputs de Texto e Senha */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    display: block;
+    width: 100%;
+    padding: 0.75rem;
+    /* 12px */
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    /* 8px */
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+}
+
+/* Espaçamento entre os campos */
+form>div+div {
+    margin-top: 1.25rem;
+    /* 20px */
+}
+
+/* Mensagens de Erro */
+.error-message {
+    color: var(--error-color);
+    font-size: 0.875rem;
+    /* 14px */
+    margin-top: 0.5rem;
+    /* 8px */
+}
+
+/* Container de Ações (Link 'Já tem uma conta?' e Botão 'Cadastrar') */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 1.5rem;
+    /* 24px */
+}
+
+/* Links */
+a {
+    font-size: 0.875rem;
+    /* 14px */
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Botão de Submit */
+button[type="submit"] {
+    margin-left: 1rem;
+    padding: 0.625rem 1.25rem;
+    /* 10px 20px */
+    background-color: var(--primary-color);
+    color: var(--button-text-color);
+    border: none;
+    border-radius: 0.5rem;
+    /* 8px */
+    font-weight: 600;
+    font-size: 0.875rem;
+    /* 14px */
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+button[type="submit"]:hover {
+    background-color: #4338ca;
+    /* Tom mais escuro da cor primária */
+}
