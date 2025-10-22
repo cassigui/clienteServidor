@@ -38,7 +38,7 @@ class RegisterController extends Controller
 
         return response()->json([
             "message" => "Created",
-        ], 201); // 👈 Retorno 201 Created
+        ], 201); 
     }
 
     // public function store(RegisterUserRequest $request)

@@ -7,7 +7,6 @@
             <form id="register-form" api-url-register="{{ $apiBaseUrl }}/users" class="needs-validation" novalidate>
                 @csrf
 
-                {{-- 🛑 GRID BOOTSTRAP: Define o layout de 2 colunas --}}
                 <div class="row g-3">
 
                     {{-- 1. CAMPO NOME (1/2 Coluna) --}}

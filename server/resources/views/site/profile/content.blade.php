@@ -5,7 +5,7 @@
             <p>Atualize os dados da sua conta e seu currículo.</p>
         </header>
 
-        <form id="update-form" api-url-update="{{ $apiBaseUrl }}/users/{{ $user->id }}">
+        <form id="update-form" api-url-update="{{ $apiBaseUrl }}/users/{{ $userId }}">
             @csrf
 
             <div>
@@ -75,7 +75,7 @@
         </header>
 
         {{-- FORMULÁRIO DE LOGOUT --}}
-        <form id="delete-form" api-url-delete="{{ $apiBaseUrl }}/users/{{ $user->id }}">
+        <form id="delete-form" api-url-delete="{{ $apiBaseUrl }}/users/{{ $userId }}">
             @csrf
 
             <div class="form-actions">

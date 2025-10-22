@@ -35,6 +35,7 @@ class ProfileController extends Controller
             'Authorization' => 'Bearer ' . $token,
         ])->get($apiUrl);
 
+        info($response);
         if ($response->successful()) {
             $apiData = $response->json();
             $apiBaseUrl = config('services.api.base_url');
@@ -42,7 +43,7 @@ class ProfileController extends Controller
 
             return view(
                 'site.profile.index',
-                compact('user', 'apiBaseUrl')
+                compact('user', 'userId', 'apiBaseUrl')
             );
         }
 

@@ -1,8 +1,8 @@
 @extends('layouts.site')
 
 @push('head')
-@section('title', 'Meu Perfil')
-<link rel="stylesheet" href="{{ asset('css/site/profile/style.css') }}" />
+    @section('title', 'Meu Perfil')
+    <link rel="stylesheet" href="{{ asset('css/site/profile/style.css') }}" />
 @endpush
 
 @section('content')
@@ -10,14 +10,13 @@
 @endsection
 
 @push('scripts')
-
     {{-- Script de update --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const form = document.getElementById("update-form");
             const apiUrl = form.getAttribute('api-url-update');
 
-            form.addEventListener("submit", async function (e) {
+            form.addEventListener("submit", async function(e) {
                 e.preventDefault();
 
                 const formData = new FormData(form);
@@ -29,7 +28,8 @@
                 const jwtToken = localStorage.getItem('jwt_token');
 
                 if (!jwtToken) {
-                    alert("Sessão expirada ou Token de autenticação não encontrado. Faça login novamente.");
+                    alert(
+                        "Sessão expirada ou Token de autenticação não encontrado. Faça login novamente.");
                     window.location.href = "{{ route('login') }}";
                     return;
                 }
@@ -39,22 +39,20 @@
                         method: "PATCH",
                         headers: {
                             "Authorization": `Bearer ${jwtToken}`,
-                            "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
+                            "X-CSRF-TOKEN": document.querySelector('input[name="_token"]')
+                                .value,
                             "Accept": "application/json",
                             "Content-Type": "application/json",
                         },
                         body: JSON.stringify(data)
                     });
 
+                    console.log(response)
+
                     if (response.ok) {
-
-                        if (response.status === 204) {
+                        if (response.status === 200) {
                             alert("Atualização realizada com sucesso!");
-                        } else {
-                            const result = await response.json();
-                            alert("Atualização realizada com sucesso!");
-                        }
-
+                        } 
                     } else {
                         let errorDetails = `Erro ${response.status}: Ocorreu uma falha ao atualizar.`;
                         let isValidationError = false;
@@ -75,7 +73,8 @@
 
                                 const div = document.createElement('div');
                                 div.classList.add('alert', 'alert-danger');
-                                div.innerHTML = `<h4 class="alert-heading">Ops! Erro de Validação:</h4>`;
+                                div.innerHTML =
+                                `<h4 class="alert-heading">Ops! Erro de Validação:</h4>`;
                                 div.appendChild(ul);
                                 form.prepend(div);
                                 isValidationError = true;
@@ -85,9 +84,11 @@
                             }
 
                         } catch (e) {
-                            console.warn("Falha ao ler JSON de erro. O corpo da resposta pode estar vazio ou não ser JSON válido.", e);
+                            console.warn(
+                                "Falha ao ler JSON de erro. O corpo da resposta pode estar vazio ou não ser JSON válido.",
+                                e);
                             if (response.status === 401) {
-                                errorDetails = "Não autorizado. Sua sessão pode ter expirado.";
+                                errorDetails = "invalid token.";
                             }
                         }
 
@@ -105,11 +106,11 @@
 
     {{-- Script de logout --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const formLogout = document.getElementById("logout-form");
             const apiUrl = formLogout.getAttribute('api-url-logout');
 
-            formLogout.addEventListener("submit", async function (e) {
+            formLogout.addEventListener("submit", async function(e) {
                 e.preventDefault();
                 document.querySelectorAll('.alert').forEach(a => a.remove());
 
@@ -128,7 +129,8 @@
                         method: "POST",
                         headers: {
                             "Authorization": `Bearer ${jwtToken}`,
-                            "X-CSRF-TOKEN": document.querySelector('#logout-form input[name="_token"]').value,
+                            "X-CSRF-TOKEN": document.querySelector(
+                                '#logout-form input[name="_token"]').value,
                             "Accept": "application/json",
                         },
                     });
@@ -140,8 +142,7 @@
                             try {
                                 const result = await response.json();
                                 logoutMessage = result.message || logoutMessage;
-                            } catch (e) {
-                            }
+                            } catch (e) {}
                         }
 
                         alert(logoutMessage);
@@ -149,7 +150,8 @@
 
                     } else {
                         // 3. Outros Erros (403, 500, etc.)
-                        let errorMessage = `Erro ${response.status}: Não foi possível encerrar a sessão.`;
+                        let errorMessage =
+                            `Erro ${response.status}: Não foi possível encerrar a sessão.`;
                         try {
                             const result = await response.json();
                             errorMessage = result.message || errorMessage;
@@ -174,15 +176,17 @@
 
     {{-- Script para deletar conta --}}
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const formDelete = document.getElementById("delete-form");
             const apiUrlDelete = formDelete.getAttribute('api-url-delete');
 
-            formDelete.addEventListener("submit", async function (e) {
+            formDelete.addEventListener("submit", async function(e) {
                 e.preventDefault();
                 document.querySelectorAll('.alert').forEach(a => a.remove());
 
-                if (!confirm("Tem certeza que deseja DELETAR sua conta permanentemente? Esta ação é irreversível.")) {
+                if (!confirm(
+                        "Tem certeza que deseja DELETAR sua conta permanentemente? Esta ação é irreversível."
+                        )) {
                     return;
                 }
 
@@ -200,7 +204,8 @@
                         method: "DELETE",
                         headers: {
                             "Authorization": `Bearer ${jwtToken}`,
-                            "X-CSRF-TOKEN": document.querySelector('#delete-form input[name="_token"]').value,
+                            "X-CSRF-TOKEN": document.querySelector(
+                                '#delete-form input[name="_token"]').value,
                             "Accept": "application/json",
                         },
                     });
@@ -219,7 +224,8 @@
                             const result = await response.json();
                             errorMessage = result.message || errorMessage;
                         } catch (e) {
-                            console.warn("Falha ao ler JSON de erro. O servidor retornou texto/vazio.", e);
+                            console.warn("Falha ao ler JSON de erro. O servidor retornou texto/vazio.",
+                                e);
                             if (response.status === 401) {
                                 errorMessage = "Não autorizado. Sua sessão pode ter expirado.";
                             } else if (response.status === 403) {
@@ -237,5 +243,4 @@
             // -----------------------------------------------------------------
         });
     </script>
-
 @endpush

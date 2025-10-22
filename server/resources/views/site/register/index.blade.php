@@ -33,8 +33,9 @@
                         headers: {
                             "X-CSRF-TOKEN": document.querySelector('input[name="_token"]').value,
                             "Accept": "application/json",
+                            'Content-Type': 'application/json'
                         },
-                        body: formData
+                        body: JSON.stringify(data) 
                     });
 
                     if (response.ok) {
